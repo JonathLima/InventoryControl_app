@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Dev/Java/ControleDeProdutos/app/src/main/res/drawable/bg_btn.xml" value="0.331" />
+        <entry key="..\:/Dev/Java/ControleDeProdutos/app/src/main/res/drawable/bg_edit.xml" value="0.331" />
+        <entry key="..\:/Dev/Java/ControleDeProdutos/app/src/main/res/drawable/ic_adicionar.xml" value="0.184" />
+        <entry key="..\:/Dev/Java/ControleDeProdutos/app/src/main/res/drawable/ic_delete_item.xml" value="0.184" />
+        <entry key="..\:/Dev/Java/ControleDeProdutos/app/src/main/res/drawable/ic_edit_product.xml" value="0.184" />
+        <entry key="..\:/Dev/Java/ControleDeProdutos/app/src/main/res/drawable/ic_menu.xml" value="0.184" />
+        <entry key="..\:/Dev/Java/ControleDeProdutos/app/src/main/res/drawable/ic_more.xml" value="0.184" />
+        <entry key="..\:/Dev/Java/ControleDeProdutos/app/src/main/res/drawable/ic_sobre.xml" value="0.184" />
+        <entry key="..\:/Dev/Java/ControleDeProdutos/app/src/main/res/drawable/ic_voltar.xml" value="0.184" />
+        <entry key="..\:/Dev/Java/ControleDeProdutos/app/src/main/res/layout/activity_form_produto.xml" value="0.34479166666666666" />
+        <entry key="..\:/Dev/Java/ControleDeProdutos/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Dev/Java/ControleDeProdutos/app/src/main/res/layout/activity_main2.xml" value="0.16458333333333333" />
+        <entry key="..\:/Dev/Java/ControleDeProdutos/app/src/main/res/layout/content_main.xml" value="0.3416666666666667" />
+        <entry key="..\:/Dev/Java/ControleDeProdutos/app/src/main/res/layout/item_produto.xml" value="0.340625" />
+        <entry key="..\:/Dev/Java/ControleDeProdutos/app/src/main/res/layout/toolbar.xml" value="0.34375" />
+        <entry key="..\:/Dev/Java/ControleDeProdutos/app/src/main/res/layout/toolbar_voltar.xml" value="0.33" />
+        <entry key="..\:/Dev/Java/ControleDeProdutos/app/src/main/res/menu/menu_main.xml" value="0.3394871794871795" />
+        <entry key="..\:/Dev/Java/ControleDeProdutos/app/src/main/res/menu/menu_toolbar.xml" value="0.3384615384615385" />
+        <entry key="..\:/Dev/Java/ControleDeProdutos/app/src/main/res/menu/toolbar.xml" value="0.3394871794871795" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
