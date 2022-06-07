@@ -1,60 +1,61 @@
-package com.example.controledeprodutos;
+package com.example.controledeprodutos.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.controledeprodutos.adapter.AdapterProduto;
+import com.example.controledeprodutos.autentication.LoginActivity;
+import com.example.controledeprodutos.helper.FirebaseHelper;
+import com.example.controledeprodutos.model.Produto;
+import com.example.controledeprodutos.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 import com.tsuryo.swipeablerv.SwipeLeftRightCallback;
 import com.tsuryo.swipeablerv.SwipeableRecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements AdapterProduto.OnClick {
     private AdapterProduto adapterProduto;
-    private ProdutoDAO produtoDAO;
+
     private List<Produto> produtoList = new ArrayList<>();
     private SwipeableRecyclerView rvProdutos;
 
     private TextView textInfo;
     private ImageButton ibAdd;
     private ImageButton ibMenu;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        produtoDAO = new ProdutoDAO(this);
-        produtoList = produtoDAO.getListProdutos();
-
-        textInfo = findViewById(R.id.text_info);
-        ibAdd = findViewById(R.id.ib_add);
-        ibMenu = findViewById(R.id.ib_menu);
-        rvProdutos = findViewById(R.id.rvProdutos);
-
-        configRecyclerView();
+        iniciaComponentes();
         ouvinteCliques();
+        configRecyclerView();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        configRecyclerView();
+
+        recuperaProdutos();
     }
 
     private void ouvinteCliques(){
@@ -69,10 +70,16 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
 
             popupMenu.setOnMenuItemClickListener(menuItem -> {
                 if(menuItem.getItemId() == R.id.menu_sobre) {
+
                     Toast.makeText(this, "Controle de Estoque", Toast.LENGTH_SHORT).show();
+
+                }else if(menuItem.getItemId() == R.id.menu_sair){
+                    FirebaseHelper.getAuth().signOut();
+                    startActivity(new Intent(this, LoginActivity.class));
                 }
                 return true;
             });
+
 
             popupMenu.show();
 
@@ -81,11 +88,6 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
     }
 
     private void configRecyclerView(){
-
-        produtoList.clear();
-        produtoList = produtoDAO.getListProdutos();
-
-        verifyQtdList();
 
         rvProdutos.setLayoutManager(new LinearLayoutManager(this));
         rvProdutos.setHasFixedSize(true);
@@ -103,23 +105,52 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
             @Override
             public void onSwipedRight(int position) {
                 Produto produto = produtoList.get(position);
-                produtoDAO.deletaProduto(produto);
                 produtoList.remove(produto);
+                produto.deletarProduto();
                 adapterProduto.notifyItemRemoved(position);
 
                 verifyQtdList();
-
             }
         });
 
     }
 
+    private void recuperaProdutos(){
+        DatabaseReference produtosRef = FirebaseHelper.getDatabaseReference()
+                .child("produtos")
+                .child(FirebaseHelper.getIdFirebase());
+        produtosRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                produtoList.clear();
+
+                for(DataSnapshot snap : snapshot.getChildren()){
+                    Produto produto = snap.getValue(Produto.class);
+
+
+                    produtoList.add(produto);
+                }
+                verifyQtdList();
+                Collections.reverse(produtoList);
+                adapterProduto.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
     private void verifyQtdList(){
         if(produtoList.size() == 0){
+            textInfo.setText("Nenhum produto cadastrado.");
             textInfo.setVisibility(View.VISIBLE);
         }else{
             textInfo.setVisibility(View.GONE);
         }
+
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override
@@ -129,5 +160,12 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
         startActivity(intent);
     }
 
+    private void iniciaComponentes(){
+        textInfo = findViewById(R.id.text_info);
+        ibAdd = findViewById(R.id.ib_add);
+        ibMenu = findViewById(R.id.ib_menu);
+        rvProdutos = findViewById(R.id.rvProdutos);
+        progressBar = findViewById(R.id.progressBar);
+    }
 
 }

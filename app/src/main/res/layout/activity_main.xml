@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F76A65"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
 
     <include
         android:id="@+id/include2"
@@ -15,20 +15,37 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/text_info"
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nenhum produto adicionado"
-        android:visibility="gone"
-        tools:visibility="visible"
-        android:textColor="@android:color/white"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="@+id/rvProdutos"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include2" />
+        app:layout_constraintTop_toTopOf="@+id/include2">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateTint="@android:color/white" />
+
+        <TextView
+            android:id="@+id/text_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Carregando produtos..."
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="92dp"
+            tools:layout_editor_absoluteY="265dp" />
+
+
+    </LinearLayout>
 
     <com.tsuryo.swipeablerv.SwipeableRecyclerView
         android:id="@+id/rvProdutos"

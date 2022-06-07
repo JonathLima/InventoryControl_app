@@ -2,29 +2,30 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/background_app"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_app"
-    tools:context=".activity.FormProdutoActivity">
+    tools:context=".autentication.CriarContaActivity">
 
     <include
-        android:id="@+id/include"
+        android:id="@+id/include3"
         layout="@layout/toolbar_voltar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Adicionar/Editar Produtos"
+        android:text="Criar Conta"
         android:textColor="@android:color/white"
-        android:textSize="18dp"
+        android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/include"
+        app:layout_constraintBottom_toBottomOf="@+id/include3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/include3" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -33,107 +34,95 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include">
-
+        app:layout_constraintTop_toBottomOf="@+id/include3" >
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="32dp"
-
+            android:gravity="center"
+            android:padding="24dp"
             >
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_gravity="center_horizontal"
-                app:cardCornerRadius="5dp">
-
-                <ImageView
-                    android:id="@+id/img_produto"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:onClick="verificaPermisaoGaleria"
-                    android:src="@drawable/ic__splash_logo" />
-
-            </androidx.cardview.widget.CardView>
-
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Produto"
+                android:text="Nome"
                 android:textColor="@android:color/white"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/edit_produto"
+                android:id="@+id/edit_nome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/bg_edit"
-
-                android:hint="Nome do produto"
                 android:maxHeight="55dp"
+                android:background="@drawable/bg_edit"
+                android:hint="Nome"
                 android:padding="16dp" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Estoque"
+                android:text="E-mail"
                 android:textColor="@android:color/white"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/edit_quantidade"
+                android:id="@+id/edit_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/bg_edit"
-                android:hint="Quantidade"
-                android:inputType="number"
                 android:maxHeight="55dp"
+                android:background="@drawable/bg_edit"
+                android:hint="E-mail"
                 android:padding="16dp" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Valor"
+                android:text="@string/senha"
                 android:textColor="@android:color/white"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/edit_valor"
+                android:id="@+id/edit_senha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:background="@drawable/bg_edit"
-                android:hint="Valor do produto"
-                android:inputType="numberDecimal"
                 android:maxHeight="55dp"
+                android:hint="Senha"
+                android:inputType="textPassword"
                 android:padding="16dp" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="35dp"
-                android:background="@drawable/bg_btn"
+                android:layout_marginTop="20dp"
                 android:maxHeight="55dp"
-                android:onClick="salvarProduto"
-                android:text="Salvar"
+                android:background="@drawable/bg_btn"
+                android:onClick="validaDados"
+                android:text="Criar Conta"
                 android:textAllCaps="false"
-                android:textColor="#F76A65"
-                android:textSize="16sp"
+                android:textColor="@color/background_app"
                 app:backgroundTint="@android:color/white" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center"
+                android:indeterminateTint="@android:color/white"/>
+
+
 
         </LinearLayout>
     </ScrollView>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

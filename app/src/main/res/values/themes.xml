@@ -32,8 +32,8 @@
         </item>
     </style>
 
-    <style name="PopupMenu" parent="@android:style/Widget.PopupMenu">
-
+    <style name="Theme.Splash.Activity" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item  name="android:statusBarColor" >#F76A65</item>
     </style>
 
 </resources>
